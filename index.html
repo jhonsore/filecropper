@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang ="en">
+    <head>
+        <meta charset="UTF-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Filecropper</title>
+        <link rel="Stylesheet" type="text/css" href="filecropper/filecropper.css" />
+        <style type="text/css">
+          a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+
+          #wrapper{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            width: 200px;
+            margin-left: -100px;
+          }
+        </style>
+
+
+    </head>
+    <body>
+      <div id="wrapper">
+        <input type="file" id="filecropper-button-image" accept=".JPG,.JPEG, .jpg, .jpeg, .png, .PNG" />
+        <br /><br />
+        <input type="file" id="filecropper-button-file" />
+      </div>
+
+      <script src="filecropper/filecropper.js"></script>
+      <script type="text/javascript">
+
+      function createFilecrop(id){
+        var data = {
+          headers: [{key:'Authorization', value:'my-value-key'}],
+          url: 'upload.php',
+          target: id,
+          editImage: true,
+          crop:{
+              width:350,
+              height:250,
+              type:"square"
+          },
+          text:{
+              noSUpport:"This application requires modern browser support, please update yours.",
+              btOk:"Upload",
+              btEdit:"Edit",
+              titleImageLoaded:"Image loaded sucessfull",
+              messageImageLoaded:"Now, what do you want to do?",
+              btCancelText:"Cancel",
+              btSaveText:"Save",
+              warning:"Warning",
+              errorImageLoaded:"Some error ocurred when uploading the file. Try again!",
+              btErrorImageLoaded: "Close"
+          },
+          onStartUpload:function(){},
+          onRemoved: function(){
+            console.log('removed');
+          },
+          onFileSelected: function(__args__){
+            console.log('file selected: '+__args__);
+          },
+          onComplete: function(__args__){
+
+            console.log('complete');
+          }
+        };
+        var f = new Filecropper(data);
+      }
+
+      createFilecrop("#filecropper-button-image");
+      createFilecrop("#filecropper-button-file");
+
+
+      </script>
+    </body>
+</html>
